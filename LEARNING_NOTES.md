@@ -533,12 +533,32 @@ If the database is unavailable, the application cannot function correctly. Conne
 
 ✅ Completed
 
+# Module 3 - Authentication
+
+## What I Built
+Implemented user registration, login, JWT token generation, and protected profile route.
+
+## APIs Created
+POST /api/auth/register
+POST /api/auth/login
+GET /api/auth/profile
+
+## Problem Faced
+Mongoose 9 async pre-save hook gave:
+next is not a function
+
+## Solution
+Removed next() from async pre-save hook.
+
+## Status
+✅ Completed
+
 
 # 🚀 Upcoming Modules
 
 * [x] Module 1 - Backend Configuration
 * [X] Module 2 - MongoDB Atlas Integration
-* [ ] Module 3 - Authentication (JWT)
+* [X] Module 3 - Authentication (JWT)
 * [ ] Module 4 - Event CRUD
 * [ ] Module 5 - Ticket Booking
 * [ ] Module 6 - Razorpay Payment Integration
