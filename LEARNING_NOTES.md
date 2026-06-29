@@ -584,11 +584,29 @@ Removed next() from Event model pre-save hook.
 ## Status
 ✅ Completed
 
+# Module 5 - Ticket Booking
+
+## APIs Created
+- POST /api/bookings
+- GET /api/bookings/my-bookings
+- GET /api/bookings/:id
+- PUT /api/bookings/:id/cancel
+
+## Features
+- Book tickets for an event
+- View my bookings
+- Reduce available tickets after booking
+- Restore tickets on cancellation
+- Booking linked with user and event
+
+## Status
+✅ Completed
+
 * [x] Module 1 - Backend Configuration
 * [X] Module 2 - MongoDB Atlas Integration
 * [X] Module 3 - Authentication (JWT)
 * [X] Module 4 - Event CRUD
-* [ ] Module 5 - Ticket Booking
+* [X] Module 5 - Ticket Booking
 * [ ] Module 6 - Razorpay Payment Integration
 * [ ] Module 7 - QR Code Generation
 * [ ] Module 8 - QR Check-in

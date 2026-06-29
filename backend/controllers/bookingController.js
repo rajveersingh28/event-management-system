@@ -1,9 +1,11 @@
+const generateQRCode = require('../utils/generateQRCode');
 const Booking = require('../models/Booking');
 const Event = require('../models/Event');
 
 // @desc    Book ticket(s) for an event
 // @route   POST /api/bookings
 // @access  Private
+
 const bookTicket = async (req, res, next) => {
     try {
         const { eventId, quantity } = req.body;
@@ -14,24 +16,23 @@ const bookTicket = async (req, res, next) => {
             throw new Error('Please provide a valid event ID and a quantity of at least 1');
         }
 
-        // 2. Fetch the target event
+        // 2. Fetch target event
         const event = await Event.findById(eventId);
         if (!event) {
             res.status(404);
             throw new Error('The requested event does not exist');
         }
 
-        // 3. Inventory Check: Ensure sufficient tickets are left
+        // 3. Inventory Check
         if (event.availableTickets < quantity) {
             res.status(400);
             throw new Error(`Insufficient tickets available. Only ${event.availableTickets} tickets remaining.`);
         }
 
-        // 4. Calculate pricing parameters
+        // 4. Calculate pricing
         const totalAmount = quantity * event.price;
 
-        // 5. Update Inventory (Atomic modification strategy to prevent race-conditions)
-        // We update using findByIdAndUpdate combined with validation to ensure concurrency safety
+        // 5. Update Inventory (Atomic check-and-modify sequence)
         const updatedEvent = await Event.findOneAndUpdate(
             { _id: eventId, availableTickets: { $gte: quantity } },
             { $inc: { availableTickets: -quantity } },
@@ -43,28 +44,34 @@ const bookTicket = async (req, res, next) => {
             throw new Error('Ticket booking failed due to a high-traffic inventory conflict. Please try again.');
         }
 
-        // 6. Create Booking Document record
-        // Note: paymentStatus defaults to "Pending". It will shift to "Paid" during Razorpay integration module.
+        // 6. Create Initial Booking Document record
         const booking = await Booking.create({
             user: req.user._id,
             event: eventId,
             quantity,
             totalAmount,
             bookingStatus: 'Booked',
-            paymentStatus: event.price === 0 ? 'Paid' : 'Pending', // Free events are instantly marked Paid
-            qrCode: '' // Placeholder text for now (Will be linked to QR Utility in upcoming module)
+            paymentStatus: event.price === 0 ? 'Paid' : 'Pending',
+            qrCode: '' // Leave empty initially
         });
 
+        // 7. Dynamic Automation Step: Generate the structured QR code string payload
+        const qrCodeData = await generateQRCode(booking._id, req.user._id, eventId);
+
+        // 8. Bind QR payload back to our document and commit the transaction save
+        booking.qrCode = qrCodeData;
+        await booking.save();
+
+        // 9. Return the fully initialized booking payload response
         res.status(201).json({
             success: true,
-            message: 'Booking initiated successfully',
+            message: 'Booking initiated and ticket QR Code generated successfully',
             booking
         });
     } catch (error) {
         next(error);
     }
 };
-
 // @desc    Get all bookings belonging to the authenticated user
 // @route   GET /api/bookings/my-bookings
 // @access  Private
