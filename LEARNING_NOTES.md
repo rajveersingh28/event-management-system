@@ -556,10 +556,38 @@ Removed next() from async pre-save hook.
 
 # 🚀 Upcoming Modules
 
+# Module 4 - Event CRUD
+
+## APIs Created
+- POST /api/events
+- GET /api/events
+- GET /api/events/:id
+- PUT /api/events/:id
+- DELETE /api/events/:id
+
+## Features
+- Create event
+- View all events
+- View single event
+- Update event
+- Delete event
+- Organizer ownership check
+- JWT protected create/update/delete
+
+## Problem Faced
+Mongoose 9 pre-save hook gave:
+next is not a function
+
+## Solution
+Removed next() from Event model pre-save hook.
+
+## Status
+✅ Completed
+
 * [x] Module 1 - Backend Configuration
 * [X] Module 2 - MongoDB Atlas Integration
 * [X] Module 3 - Authentication (JWT)
-* [ ] Module 4 - Event CRUD
+* [X] Module 4 - Event CRUD
 * [ ] Module 5 - Ticket Booking
 * [ ] Module 6 - Razorpay Payment Integration
 * [ ] Module 7 - QR Code Generation
