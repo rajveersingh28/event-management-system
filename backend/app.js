@@ -1,13 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const bookingRoutes = require('./routes/bookingRoutes');
+const paymentRoutes = require('./routes/paymentRoutes'); // Import payment routes
+
+const app = express();
 
 // Route Imports
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoutes');
-const bookingRoutes = require('./routes/bookingRoutes'); // Import newly created booking routes
 
-const app = express();
 
 // Security and Parsers Middlewares
 app.use(cors({
@@ -18,6 +20,11 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use('/api/auth', authRoutes);
+app.use('/api/events', eventRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/payments', paymentRoutes); // Mount Payment Endpoints
 
 // Base Gateway Route
 app.get('/', (req, res) => {
@@ -50,4 +57,5 @@ app.use((err, req, res, next) => {
     });
 });
 
+module.exports = app;
 module.exports = app;

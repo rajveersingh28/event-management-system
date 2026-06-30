@@ -675,6 +675,23 @@ Removed next() from Event model pre-save hook.
 ## 📅 Date Completed
 29 June 2026
 
+# Module 7 - QR Check-in
+
+## APIs Created
+- PUT /api/bookings/checkin/:id
+
+## Features
+- Validates booking by ID
+- Prevents check-in for cancelled bookings
+- Marks ticket as Checked In
+- Prevents duplicate check-ins
+
+## Status
+✅ Completed
+
+## 📅 Date Completed
+30 June 2026
+
 
 # 🚀 Upcoming Modules
 
@@ -684,7 +701,7 @@ Removed next() from Event model pre-save hook.
 * [x] Module 4 - Event CRUD
 * [x] Module 5 - Ticket Booking
 * [x] Module 6 - QR Code Generation
-* [ ] Module 7 - QR Check-in
+* [X] Module 7 - QR Check-in
 * [ ] Module 8 - Razorpay Payment Integration
 * [ ] Module 9 - Analytics Dashboard
 * [ ] Module 10 - React Frontend Integration

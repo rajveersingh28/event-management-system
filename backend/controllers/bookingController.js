@@ -180,6 +180,11 @@ const checkInBooking = async (req, res, next) => {
             throw new Error('This booking has been cancelled.');
         }
 
+        if (booking.paymentStatus !== 'Paid') {
+            res.status(400);
+            throw new Error('Payment not completed. Check-in denied.');
+        }
+
         if (booking.checkInStatus === 'Checked In') {
             res.status(400);
             throw new Error('Ticket already checked in.');
