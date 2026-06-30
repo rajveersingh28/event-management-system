@@ -3,6 +3,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bookingRoutes = require('./routes/bookingRoutes');
 const paymentRoutes = require('./routes/paymentRoutes'); // Import payment routes
+const analyticsRoutes = require('./routes/analyticsRoutes');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/bookings', bookingRoutes); // Mounted Booking Gateway Endpoints
+app.use('/api/analytics', analyticsRoutes);
 
 // System Health Check Route
 app.get('/api/health', (req, res) => {
@@ -57,5 +59,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-module.exports = app;
 module.exports = app;

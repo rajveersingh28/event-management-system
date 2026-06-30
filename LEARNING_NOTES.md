@@ -692,6 +692,22 @@ Removed next() from Event model pre-save hook.
 ## 📅 Date Completed
 30 June 2026
 
+# Module 8 - Razorpay Payment Integration
+
+## APIs Created
+- POST /api/payments/create-order
+- POST /api/payments/verify
+
+## Features
+- Created Razorpay test order
+- Used Razorpay API keys from .env
+- Amount converted into paise
+- Payment verification logic added using crypto
+- Booking paymentStatus updates to Paid after successful verification
+
+## Status
+✅ Partially Completed
+
 
 # 🚀 Upcoming Modules
 
