@@ -550,11 +550,22 @@ next is not a function
 ## Solution
 Removed next() from async pre-save hook.
 
+## Files Created / Modified
+
+- models/User.js
+- controllers/authController.js
+- middleware/authMiddleware.js
+- routes/authRoutes.js
+- utils/generateToken.js
+- app.js
+
 ## Status
 ✅ Completed
 
+## 📅 Date Completed
 
-# 🚀 Upcoming Modules
+29 June 2026
+
 
 # Module 4 - Event CRUD
 
@@ -581,8 +592,19 @@ next is not a function
 ## Solution
 Removed next() from Event model pre-save hook.
 
+## Files Created / Modified
+
+- models/Event.js
+- controllers/eventController.js
+- routes/eventRoutes.js
+- middleware/adminMiddleware.js
+- app.js
+
 ## Status
 ✅ Completed
+
+## 📅 Date Completed
+29 June 2026
 
 # Module 5 - Ticket Booking
 
@@ -599,19 +621,138 @@ Removed next() from Event model pre-save hook.
 - Restore tickets on cancellation
 - Booking linked with user and event
 
+## Files Created / Modified
+
+- models/Booking.js
+- controllers/bookingController.js
+- routes/bookingRoutes.js
+- app.js
+
 ## Status
 ✅ Completed
 
+## 📅 Date Completed
+29 June 2026
+
+# Module 6 - QR Code Generation
+
+## APIs Updated
+
+- POST /api/bookings
+
+## Features
+
+- Generates a QR Code automatically after every successful booking.
+- Stores the QR Code as a Base64 Data URL in MongoDB.
+- QR contains:
+  - bookingId
+  - userId
+  - eventId
+- QR can be opened directly in a browser or rendered in the frontend.
+
+## Files Created
+
+- utils/generateQRCode.js
+
+## Files Modified
+
+- controllers/bookingController.js
+
+## Packages Used
+
+- qrcode
+
+## What I Learned
+
+- How QR codes are generated in Node.js.
+- Difference between image files and Base64 Data URLs.
+- How to create reusable utility functions.
+- How to update a MongoDB document after creation.
+
+## Status
+✅ Completed
+
+## 📅 Date Completed
+29 June 2026
+
+
+# 🚀 Upcoming Modules
+
 * [x] Module 1 - Backend Configuration
-* [X] Module 2 - MongoDB Atlas Integration
-* [X] Module 3 - Authentication (JWT)
-* [X] Module 4 - Event CRUD
-* [X] Module 5 - Ticket Booking
-* [ ] Module 6 - Razorpay Payment Integration
-* [ ] Module 7 - QR Code Generation
-* [ ] Module 8 - QR Check-in
+* [x] Module 2 - MongoDB Atlas Integration
+* [x] Module 3 - Authentication (JWT)
+* [x] Module 4 - Event CRUD
+* [x] Module 5 - Ticket Booking
+* [x] Module 6 - QR Code Generation
+* [ ] Module 7 - QR Check-in
+* [ ] Module 8 - Razorpay Payment Integration
 * [ ] Module 9 - Analytics Dashboard
 * [ ] Module 10 - React Frontend Integration
 * [ ] Module 11 - Deployment
 * [ ] Module 12 - Final Documentation
 * [ ] Module 13 - Viva Preparation
+
+---
+
+# 📊 Project Progress
+
+## Backend
+
+- Authentication ✅
+- Event Management ✅
+- Ticket Booking ✅
+- QR Code Generation ✅
+- QR Check-in ⏳
+- Razorpay Payment ⏳
+
+## Database Collections
+
+- Users
+- Events
+- Bookings
+
+## APIs Built So Far
+
+### Authentication
+
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/profile
+
+### Events
+
+- POST /api/events
+- GET /api/events
+- GET /api/events/:id
+- PUT /api/events/:id
+- DELETE /api/events/:id
+
+### Bookings
+
+- POST /api/bookings
+- GET /api/bookings/my-bookings
+- GET /api/bookings/:id
+- PUT /api/bookings/:id/cancel
+
+## Total APIs Created
+
+12 REST APIs
+
+## Current Completion
+
+Backend: 80%
+
+Frontend: 0%
+
+Overall Project: ~65%
+
+
+# 📝 Git Commit History
+
+- Initialize MERN project structure
+- Connect backend to MongoDB Atlas
+- Implement user authentication with JWT
+- Implement Event CRUD
+- Implement ticket booking module
+- Add QR code generation for bookings
+---

@@ -32,6 +32,11 @@ const bookingSchema = new mongoose.Schema({
         enum: ['Pending', 'Paid'],
         default: 'Pending'
     },
+    checkInStatus: {
+    type: String,
+    enum: ['Not Checked In', 'Checked In'],
+    default: 'Not Checked In'
+    },
     qrCode: {
         type: String,
         default: '' // Will be populated dynamically using the QR Code Generator utility later

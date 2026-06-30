@@ -4,7 +4,8 @@ const {
     bookTicket,
     getMyBookings,
     getBookingById,
-    cancelBooking
+    cancelBooking,
+    checkInBooking
 } = require('../controllers/bookingController');
 const { protect } = require('../middleware/authMiddleware');
 
@@ -26,5 +27,8 @@ router.route('/:id')
 
 router.route('/:id/cancel')
     .put(cancelBooking);
+
+router.route('/checkin/:id')
+    .put(checkInBooking);
 
 module.exports = router;

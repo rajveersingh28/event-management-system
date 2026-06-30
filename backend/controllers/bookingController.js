@@ -163,9 +163,47 @@ const cancelBooking = async (req, res, next) => {
     }
 };
 
+// @desc    Check in booking
+// @route   PUT /api/bookings/checkin/:id
+// @access  Private
+const checkInBooking = async (req, res, next) => {
+    try {
+        const booking = await Booking.findById(req.params.id).populate('event');
+
+        if (!booking) {
+            res.status(404);
+            throw new Error('Booking not found');
+        }
+
+        if (booking.bookingStatus === 'Cancelled') {
+            res.status(400);
+            throw new Error('This booking has been cancelled.');
+        }
+
+        if (booking.checkInStatus === 'Checked In') {
+            res.status(400);
+            throw new Error('Ticket already checked in.');
+        }
+
+        booking.checkInStatus = 'Checked In';
+
+        await booking.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Ticket checked in successfully.',
+            booking
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     bookTicket,
     getMyBookings,
     getBookingById,
-    cancelBooking
+    cancelBooking,
+    checkInBooking
 };
