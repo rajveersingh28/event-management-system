@@ -35,9 +35,7 @@ app.get('/', (req, res) => {
 // -----------------------------------------------------------------
 // Mount Application Route Sub-Modules
 // -----------------------------------------------------------------
-app.use('/api/auth', authRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api/bookings', bookingRoutes); // Mounted Booking Gateway Endpoints
+
 app.use('/api/analytics', analyticsRoutes);
 
 // System Health Check Route
